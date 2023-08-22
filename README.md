@@ -6,7 +6,7 @@ Tutorial on SmartNICs for Hot Interconnects
 
 [Event website and Program](https://hoti.org/program/)
 
-![UCX Layer](fig/ucx_tutorial_layer_diagram_2021.png)
+![BlueField 3 SmartNIC](https://github.com/gt-crnch-rg/smartnic-tutorial-hot-interconnects/blob/41db05cd929c19a445c6afae5dcb226bfb64ac79/fig/smartnic_bf3.jpg)
 
 ## Organizers:
 * Jeffrey Young [(Georgia Institute of Technology)](https://crnch-rg.cc.gatech.edu/)
