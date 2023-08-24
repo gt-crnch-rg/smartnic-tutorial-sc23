@@ -1,5 +1,6 @@
-# smartnic-tutorial-hot-interconnects
-Tutorial on SmartNICs for Hot Interconnects
+# Leveraging SmartNICs for HPC and Data Center Applications
+
+Tutorial on SmartNICs for Hot Interconnects 2023
 
 
 **Held on**: August 25th, 1 PM - 4:30 PM US Pacific Time 
@@ -24,11 +25,13 @@ Supporting Contributors:
 This half-day tutorial offers an in-depth exploration of the state-of-the-art for SmartNICs and the emerging software ecosystems supporting them. Attendees will better understand how to use SmartNICs for HPC application acceleration, including MPI collective operation offloading, OpenMP remote offload, and algorithmic modifications to maximize on-board processing power. The tutorial presenters will discuss optimizing applications to harness SmartNICs as communication accelerators in HPC systems, and participants will have the opportunity to apply for time on systems with cutting-edge SmartNICs like NVIDIA's BlueField-3 Data Processing Unit (DPU).
 
 
-Please register for Hot Interconnects to join this tutorial. Registration is free this year and includes access to the tutorials! [Register here](https://events.zoom.us/ev/Ag0YT5e-lTNl0GMOr_hTDXekOBRsWAKSLRqAlBY0X7Bzwubg3giw~Ail5D916DQK4hw0eT8Y9bI748fr6NFuIA0s9I6LmMGGmgR0z3u4XCqabrw)
+Please register for Hot Interconnects to join this tutorial. Registration is free this year and includes access to the tutorials! 
+
+[Register here](https://events.zoom.us/ev/AsJMpqIILSfdvoquguuHegDV4gf7SEhdfzgobTBJOdfdhrhnupyU~AggLXsr32QYFjq8BlYLZ5I06Dg)
 
 ## Agenda
 
-**[Presentation slides](https://github.com/gt-crnch-rg/ucx-tutorial-hot-interconnects/blob/main/slides/UCX%202022%20HOTI%20Tutorial.pdf)**
+**Presentation slides will be shared with HotInt tutorial attendees**
 
 | Time          | Topic                                   | Presenters     | 
 | ------------- | --------------------------------------- | ------------- | 
