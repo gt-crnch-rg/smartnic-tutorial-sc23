@@ -31,23 +31,31 @@ Please register for Hot Interconnects to join this tutorial. Registration is fre
 
 ## Agenda
 
-**Presentation slides will be shared with HotInt tutorial attendees**
 
-| Time          | Topic                                   | Presenters     | 
-| ------------- | --------------------------------------- | ------------- | 
-| 9:00 - 9:20    | UCX Tutorial and Ecosystem Introduction | Oscar| 
-| 9:20 - 10:00   | UCX Basics - networking overview,       | Jeff    | 
-|                | worker and endpoint creation            |              | 
-| 10:00 - 10:10  | **BREAK**                               |               |
-| 10:10 - 10:25  | Hello World Demo                        |  Matt  | 
-| 10:25 - 10:40  | UCX memory management                   |  Jeff        | 
-| 10:40 - 10:45  | Accelerators, UCXPy                     |  Oscar |
-| 10:45 - 11:00  | GPU and UCXPy Hello World Demo          |  Matt  |
-| 11:00 - 11:10  | **BREAK**                               |               |
-| 11:10 - 11:25  | RISC-V Support for UCX                  |  Chris |
-| 11:25 - 11:50  | UCX Advanced Topics - Bindings and         |  Yossi |
-|                | OpenMPI integration                     |   | 
 
+
+
+| Time          | Topic                                   | Presenters   | 
+| ------------- | --------------------------------------- | -------------| 
+| 1:00 - 1:10    | Audience Survey and Agenda             | Jeff         | 
+| 1:10 - 1:35   | SmartNIC Introduction and Overview      | Rich G       | 
+| 1:35 - 2:00   | Programming Approaches for HPC with DPUs | Oscar       | 
+| 2:00 - 2:10   | **BREAK**                                |             |
+|               | _Strategies for Optimizing for DPUs_     |             |
+| 2:10 - 2:15   | UCC and Collective Offloads for DPUs     | Yongqin     |
+| 2:15 - 2:20   | UCC Collective Demo                      |             |
+| 2:15 - 2:20   | Blocking to Non-blocking transformations |  Jeff       |
+| 2:20 - 2:25   | P3DFFT+ Demo                             |  Jeff       |
+| 2:25 - 2:55   | Algorithmic Restructuring                |  Jeff       |
+| 2:55 - 3:05   | **BREAK**                                |             |
+| 3:05 - 3:15   | MiniMD Demo                              |  Jeff       |
+| 3:15 - 3:30   | Future Work and Other Frameworks         |  Jeff       |
+| 3:30 - 4:00   | Questions, discussions, and further hands-on |         |
+
+
+## Slides
+
+**Presentation slides will be shared with HotInt tutorial attendees. Some slides may be updated for our upcoming [Supercomputing 2023 tutorial]().**
 
 ## Link to Tutorial Video
 
