@@ -1,0 +1,31 @@
+Benchmark:           osu
+Test:                allgatherv
+TAG:                 sep23
+Cluster:             thor
+HOST list:           thor003:32,thor004:32,thor005:32,thor006:32, NNODES=4, PPN=32
+Offload mode:        bf3_ib
+Offload list:        thorbf3a003,thorbf3a004,thorbf3a005,thorbf3a006, SPN=4
+Offload daemon:      /global/home/groups/rdmaworkshop/offload_stack/dpu.offload.sep23.aarch64/bin/ucc_offload_dpu_daemon
+Offload config file: /global/home/groups/rdmaworkshop/offload_stack/etc/thor_bf3_4sp.cfg
+Offload Max sends:   4
+Offload Max recvs:   4
+Offload environment: UCX_NET_DEVICES=mlx5_0:1,UCX_TLS=rc_x,UCX_IB_TX_INLINE_RESP=64,UCX_ZCOPY_THRESH=256,UCX_RCACHE_ENABLE=y,UCX_LOG_LEVEL=warn,UCX_LOG_PRINT_ENABLE=n,UCX_LOG_LEVEL_TRIGGER=error,UCX_HANDLE_ERRORS=bt,DPU_OFFLOAD_LIST_DPUS=thorbf3a003,thorbf3a004,thorbf3a005,thorbf3a006,DPU_OFFLOAD_DBG_VERBOSE=0,OFFLOAD_CONFIG_FILE_PATH=/global/home/groups/rdmaworkshop/offload_stack/etc/thor_bf3_4sp.cfg,DPU_OFFLOAD_SERVICE_PROCESSES_PER_DPU=4,LD_LIBRARY_PATH=/global/home/groups/rdmaworkshop/offload_stack/dpu.offload.sep23.aarch64/lib:/global/home/groups/rdmaworkshop/offload_stack/ucx.offload.sep23.aarch64/lib}
+MPIRUN:              /global/home/groups/rdmaworkshop/offload_stack/ompi/bin/mpirun -np 128 -H thor003:32,thor004:32,thor005:32,thor006:32 --map-by ppr:32:node:pe=1,oversubscribe --bind-to core --rank-by core --mca btl ^openib --mca pml ucx -x UCX_NET_DEVICES=mlx5_0:1 -x UCX_TLS=all -x UCX_RCACHE_ENABLE=y -x UCX_LOG_LEVEL=warn -x UCX_LOG_PRINT_ENABLE=n -x UCX_LOG_LEVEL_TRIGGER=error -x UCX_HANDLE_ERRORS=bt --mca coll_hcoll_enable 0 --mca coll_hcoll_priority 100 --mca coll_ucc_enable 1 --mca coll_ucc_priority 100 -x UCC_LOG_LEVEL=warn -x UCC_TL_UCP_TUNE=allgather:0-inf:@dpusegments#allgatherv:0-inf:@interdpu#alltoall:0-inf:@offload#alltoallv:0-inf:@dpu_onesided -x UCC_TL_UCP_OFFLOAD_DPU_MAX_SENDS=4 -x UCC_TL_UCP_OFFLOAD_DPU_MAX_RECVS=4 -x OFFLOAD_CONFIG_FILE_PATH=/global/home/groups/rdmaworkshop/offload_stack/etc/thor_bf3_4sp.cfg -x DPU_OFFLOAD_DBG_VERBOSE=0 -x OMP_NUM_THREADS=1 -x OMP_PROC_BIND=true -x LD_LIBRARY_PATH=/global/home/groups/rdmaworkshop/offload_stack/ompi/lib:/global/home/groups/rdmaworkshop/offload_stack/nccl_rdma_sharp_plugin/lib:/global/home/groups/rdmaworkshop/offload_stack/hcoll/lib:/global/home/groups/rdmaworkshop/offload_stack/sharp/lib:/global/home/groups/rdmaworkshop/offload_stack/ucc.offload.sep23.x86_64/lib/ucc:/global/home/groups/rdmaworkshop/offload_stack/ucc.offload.sep23.x86_64/lib:/global/home/groups/rdmaworkshop/offload_stack/dpu.offload.sep23.x86_64/lib:/global/home/groups/rdmaworkshop/offload_stack/ucx.offload.sep23.x86_64/lib/ucx:/global/home/groups/rdmaworkshop/offload_stack/ucx.offload.sep23.x86_64/lib /global/home/groups/rdmaworkshop/offload_stack/ompi/tests/osu-micro-benchmarks-5.8/osu_allgatherv -f -m 256:1048576
+
+# OSU MPI Allgatherv Latency Test v5.8
+# Size       Avg Latency(us)   Min Latency(us)   Max Latency(us)  Iterations
+256                  1038.74           1030.97           1050.35        1000
+512                  1080.18           1068.63           1089.44        1000
+1024                 1079.32           1069.57           1090.08        1000
+2048                 1086.46           1075.45           1096.96        1000
+4096                 1084.87           1073.73           1097.80        1000
+8192                 1100.79           1085.05           1116.80        1000
+16384                1138.42           1093.87           1206.64         100
+32768                1535.94           1510.62           1572.12         100
+65536                3008.84           2971.97           3053.78         100
+131072               6005.13           5930.48           6068.42         100
+262144              12194.43          12080.16          12452.08         100
+524288              24784.59          24519.51          25134.64         100
+1048576             51548.01          50447.78          53042.48         100
+310.39user 332.50system 0:22.47elapsed 2860%CPU (0avgtext+0avgdata 360164maxresident)k
+0inputs+0outputs (666major+682826minor)pagefaults 0swaps

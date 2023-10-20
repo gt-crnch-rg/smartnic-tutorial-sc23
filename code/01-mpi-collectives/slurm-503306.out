@@ -1,0 +1,110 @@
+Benchmark:           osu
+Test:                allgatherv
+TAG:                 sep23
+Cluster:             thor
+HOST list:           thor003:32,thor004:32,thor005:32,thor006:32, NNODES=4, PPN=32
+MPIRUN:              /global/home/groups/rdmaworkshop/offload_stack/ompi/bin/mpirun -np 128 -H thor003:32,thor004:32,thor005:32,thor006:32 --map-by ppr:32:node:pe=1,oversubscribe --bind-to core --rank-by core --mca pml ucx -x UCX_NET_DEVICES=mlx5_0:1 -x UCX_TLS=all -x UCX_LOG_LEVEL=warn -x UCX_LOG_PRINT_ENABLE=n -x UCX_LOG_LEVEL_TRIGGER=error -x UCX_HANDLE_ERRORS=bt --mca coll_hcoll_enable 0 --mca coll_hcoll_priority 100 --mca coll_ucc_enable 0 --mca coll_ucc_priority 100 -x UCC_LOG_LEVEL=warn -x OMP_NUM_THREADS=1 -x OMP_PROC_BIND=true -x LD_LIBRARY_PATH=/global/home/groups/rdmaworkshop/offload_stack/ompi/lib:/global/home/groups/rdmaworkshop/offload_stack/nccl_rdma_sharp_plugin/lib:/global/home/groups/rdmaworkshop/offload_stack/sharp/lib:/global/home/groups/rdmaworkshop/offload_stack/hcoll/lib:/global/home/groups/rdmaworkshop/offload_stack/ucc/lib/ucc:/global/home/groups/rdmaworkshop/offload_stack/ucc/lib:/global/home/groups/rdmaworkshop/offload_stack/ucx/lib/ucx:/global/home/groups/rdmaworkshop/offload_stack/ucx/lib /global/home/groups/rdmaworkshop/offload_stack/ompi/tests/osu-micro-benchmarks-5.8/osu_allgatherv -f -m 256:1048576
+
+# OSU MPI Allgatherv Latency Test v5.8
+# Size       Avg Latency(us)   Min Latency(us)   Max Latency(us)  Iterations
+256                    70.06             57.82             82.92        1000
+512                   123.30            105.12            143.26        1000
+1024                  201.79            196.39            209.67        1000
+2048                  249.27            243.40            260.60        1000
+4096                  318.53            312.00            330.52        1000
+8192                  467.29            464.52            473.00        1000
+16384                 980.58            966.49            998.10         100
+32768                2273.15           2258.04           2287.21         100
+65536                4571.37           4200.23           4948.37         100
+131072               9029.51           8442.58           9557.51         100
+262144              11807.27          11638.10          11951.59         100
+524288              24318.58          23848.71          24964.57         100
+1048576             53378.98          52914.88          53694.58         100
+183.21user 271.57system 0:18.21elapsed 2496%CPU (0avgtext+0avgdata 218224maxresident)k
+0inputs+0outputs (2839major+324769minor)pagefaults 0swaps
+Benchmark:           osu
+Test:                allgatherv
+TAG:                 sep23
+Cluster:             thor
+HOST list:           thor003:32,thor004:32,thor005:32,thor006:32, NNODES=4, PPN=32
+Offload mode:        bf3_ib
+Offload list:        thorbf3a003,thorbf3a004,thorbf3a005,thorbf3a006, SPN=4
+Offload daemon:      /global/home/groups/rdmaworkshop/offload_stack/dpu.offload.sep23.aarch64/bin/ucc_offload_dpu_daemon
+Offload config file: /global/home/groups/rdmaworkshop/offload_stack/etc/thor_bf3_4sp.cfg
+Offload Max sends:   4
+Offload Max recvs:   4
+Offload environment: UCX_NET_DEVICES=mlx5_0:1,UCX_TLS=rc_x,UCX_IB_TX_INLINE_RESP=64,UCX_ZCOPY_THRESH=256,UCX_RCACHE_ENABLE=y,UCX_LOG_LEVEL=warn,UCX_LOG_PRINT_ENABLE=n,UCX_LOG_LEVEL_TRIGGER=error,UCX_HANDLE_ERRORS=bt,DPU_OFFLOAD_LIST_DPUS=thorbf3a003,thorbf3a004,thorbf3a005,thorbf3a006,DPU_OFFLOAD_DBG_VERBOSE=0,OFFLOAD_CONFIG_FILE_PATH=/global/home/groups/rdmaworkshop/offload_stack/etc/thor_bf3_4sp.cfg,DPU_OFFLOAD_SERVICE_PROCESSES_PER_DPU=4,LD_LIBRARY_PATH=/global/home/groups/rdmaworkshop/offload_stack/dpu.offload.sep23.aarch64/lib:/global/home/groups/rdmaworkshop/offload_stack/ucx.offload.sep23.aarch64/lib}
+MPIRUN:              /global/home/groups/rdmaworkshop/offload_stack/ompi/bin/mpirun -np 128 -H thor003:32,thor004:32,thor005:32,thor006:32 --map-by ppr:32:node:pe=1,oversubscribe --bind-to core --rank-by core --mca btl ^openib --mca pml ucx -x UCX_NET_DEVICES=mlx5_0:1 -x UCX_TLS=all -x UCX_RCACHE_ENABLE=y -x UCX_LOG_LEVEL=warn -x UCX_LOG_PRINT_ENABLE=n -x UCX_LOG_LEVEL_TRIGGER=error -x UCX_HANDLE_ERRORS=bt --mca coll_hcoll_enable 0 --mca coll_hcoll_priority 100 --mca coll_ucc_enable 1 --mca coll_ucc_priority 100 -x UCC_LOG_LEVEL=warn -x UCC_TL_UCP_TUNE=allgather:0-inf:@dpusegments#allgatherv:0-inf:@interdpu#alltoall:0-inf:@offload#alltoallv:0-inf:@dpu_onesided -x UCC_TL_UCP_OFFLOAD_DPU_MAX_SENDS=4 -x UCC_TL_UCP_OFFLOAD_DPU_MAX_RECVS=4 -x OFFLOAD_CONFIG_FILE_PATH=/global/home/groups/rdmaworkshop/offload_stack/etc/thor_bf3_4sp.cfg -x DPU_OFFLOAD_DBG_VERBOSE=0 -x OMP_NUM_THREADS=1 -x OMP_PROC_BIND=true -x LD_LIBRARY_PATH=/global/home/groups/rdmaworkshop/offload_stack/ompi/lib:/global/home/groups/rdmaworkshop/offload_stack/nccl_rdma_sharp_plugin/lib:/global/home/groups/rdmaworkshop/offload_stack/hcoll/lib:/global/home/groups/rdmaworkshop/offload_stack/sharp/lib:/global/home/groups/rdmaworkshop/offload_stack/ucc.offload.sep23.x86_64/lib/ucc:/global/home/groups/rdmaworkshop/offload_stack/ucc.offload.sep23.x86_64/lib:/global/home/groups/rdmaworkshop/offload_stack/dpu.offload.sep23.x86_64/lib:/global/home/groups/rdmaworkshop/offload_stack/ucx.offload.sep23.x86_64/lib/ucx:/global/home/groups/rdmaworkshop/offload_stack/ucx.offload.sep23.x86_64/lib /global/home/groups/rdmaworkshop/offload_stack/ompi/tests/osu-micro-benchmarks-5.8/osu_allgatherv -f -m 256:1048576
+
+# OSU MPI Allgatherv Latency Test v5.8
+# Size       Avg Latency(us)   Min Latency(us)   Max Latency(us)  Iterations
+256                  1038.74           1030.97           1050.35        1000
+512                  1080.18           1068.63           1089.44        1000
+1024                 1079.32           1069.57           1090.08        1000
+2048                 1086.46           1075.45           1096.96        1000
+4096                 1084.87           1073.73           1097.80        1000
+8192                 1100.79           1085.05           1116.80        1000
+16384                1138.42           1093.87           1206.64         100
+32768                1535.94           1510.62           1572.12         100
+65536                3008.84           2971.97           3053.78         100
+131072               6005.13           5930.48           6068.42         100
+262144              12194.43          12080.16          12452.08         100
+524288              24784.59          24519.51          25134.64         100
+1048576             51548.01          50447.78          53042.48         100
+310.39user 332.50system 0:22.47elapsed 2860%CPU (0avgtext+0avgdata 360164maxresident)k
+0inputs+0outputs (666major+682826minor)pagefaults 0swaps
+Benchmark:           osu
+Test:                allgatherv
+TAG:                 sep23
+Cluster:             thor
+HOST list:           thor003:32,thor004:32,thor005:32,thor006:32, NNODES=4, PPN=32
+MPIRUN:              /global/home/groups/rdmaworkshop/offload_stack/ompi/bin/mpirun -np 128 -H thor003:32,thor004:32,thor005:32,thor006:32 --map-by ppr:32:node:pe=1,oversubscribe --bind-to core --rank-by core --mca pml ucx -x UCX_NET_DEVICES=mlx5_2:1 -x UCX_TLS=all -x UCX_LOG_LEVEL=warn -x UCX_LOG_PRINT_ENABLE=n -x UCX_LOG_LEVEL_TRIGGER=error -x UCX_HANDLE_ERRORS=bt --mca coll_hcoll_enable 0 --mca coll_hcoll_priority 100 --mca coll_ucc_enable 0 --mca coll_ucc_priority 100 -x UCC_LOG_LEVEL=warn -x OMP_NUM_THREADS=1 -x OMP_PROC_BIND=true -x LD_LIBRARY_PATH=/global/home/groups/rdmaworkshop/offload_stack/ompi/lib:/global/home/groups/rdmaworkshop/offload_stack/nccl_rdma_sharp_plugin/lib:/global/home/groups/rdmaworkshop/offload_stack/sharp/lib:/global/home/groups/rdmaworkshop/offload_stack/hcoll/lib:/global/home/groups/rdmaworkshop/offload_stack/ucc/lib/ucc:/global/home/groups/rdmaworkshop/offload_stack/ucc/lib:/global/home/groups/rdmaworkshop/offload_stack/ucx/lib/ucx:/global/home/groups/rdmaworkshop/offload_stack/ucx/lib /global/home/groups/rdmaworkshop/offload_stack/ompi/tests/osu-micro-benchmarks-5.8/osu_allgatherv -f -m 256:1048576
+
+# OSU MPI Allgatherv Latency Test v5.8
+# Size       Avg Latency(us)   Min Latency(us)   Max Latency(us)  Iterations
+256                    75.00             58.08             87.41        1000
+512                   135.99            107.54            158.90        1000
+1024                  216.41            208.07            230.68        1000
+2048                  272.53            262.82            285.09        1000
+4096                  344.07            335.84            357.57        1000
+8192                  481.87            476.41            491.85        1000
+16384                 973.74            963.33            990.42         100
+32768                2276.58           2257.96           2298.80         100
+65536                4461.15           4168.15           4723.16         100
+131072               9034.13           8452.73           9538.94         100
+262144              12139.21          11927.74          12362.73         100
+524288              24773.29          24263.16          25525.17         100
+1048576             53654.94          53332.47          53960.20         100
+193.84user 264.98system 0:15.93elapsed 2879%CPU (0avgtext+0avgdata 213764maxresident)k
+0inputs+0outputs (48major+304775minor)pagefaults 0swaps
+Benchmark:           osu
+Test:                allgatherv
+TAG:                 sep23
+Cluster:             thor
+HOST list:           thor003:32,thor004:32,thor005:32,thor006:32, NNODES=4, PPN=32
+Offload mode:        bf2_ib
+Offload list:        thorbf2a003,thorbf2a004,thorbf2a005,thorbf2a006, SPN=4
+Offload daemon:      /global/home/groups/rdmaworkshop/offload_stack/dpu.offload.sep23.aarch64/bin/ucc_offload_dpu_daemon
+Offload config file: /global/home/groups/rdmaworkshop/offload_stack/etc/thor_bf2_4sp.cfg
+Offload Max sends:   4
+Offload Max recvs:   4
+Offload environment: UCX_NET_DEVICES=mlx5_0:1,UCX_TLS=rc_x,UCX_IB_TX_INLINE_RESP=64,UCX_ZCOPY_THRESH=256,UCX_RCACHE_ENABLE=y,UCX_LOG_LEVEL=warn,UCX_LOG_PRINT_ENABLE=n,UCX_LOG_LEVEL_TRIGGER=error,UCX_HANDLE_ERRORS=bt,DPU_OFFLOAD_LIST_DPUS=thorbf2a003,thorbf2a004,thorbf2a005,thorbf2a006,DPU_OFFLOAD_DBG_VERBOSE=0,OFFLOAD_CONFIG_FILE_PATH=/global/home/groups/rdmaworkshop/offload_stack/etc/thor_bf2_4sp.cfg,DPU_OFFLOAD_SERVICE_PROCESSES_PER_DPU=4,LD_LIBRARY_PATH=/global/home/groups/rdmaworkshop/offload_stack/dpu.offload.sep23.aarch64/lib:/global/home/groups/rdmaworkshop/offload_stack/ucx.offload.sep23.aarch64/lib}
+MPIRUN:              /global/home/groups/rdmaworkshop/offload_stack/ompi/bin/mpirun -np 128 -H thor003:32,thor004:32,thor005:32,thor006:32 --map-by ppr:32:node:pe=1,oversubscribe --bind-to core --rank-by core --mca btl ^openib --mca pml ucx -x UCX_NET_DEVICES=mlx5_2:1 -x UCX_TLS=all -x UCX_RCACHE_ENABLE=y -x UCX_LOG_LEVEL=warn -x UCX_LOG_PRINT_ENABLE=n -x UCX_LOG_LEVEL_TRIGGER=error -x UCX_HANDLE_ERRORS=bt --mca coll_hcoll_enable 0 --mca coll_hcoll_priority 100 --mca coll_ucc_enable 1 --mca coll_ucc_priority 100 -x UCC_LOG_LEVEL=warn -x UCC_TL_UCP_TUNE=allgather:0-inf:@dpusegments#allgatherv:0-inf:@interdpu#alltoall:0-inf:@offload#alltoallv:0-inf:@dpu_onesided -x UCC_TL_UCP_OFFLOAD_DPU_MAX_SENDS=4 -x UCC_TL_UCP_OFFLOAD_DPU_MAX_RECVS=4 -x OFFLOAD_CONFIG_FILE_PATH=/global/home/groups/rdmaworkshop/offload_stack/etc/thor_bf2_4sp.cfg -x DPU_OFFLOAD_DBG_VERBOSE=0 -x OMP_NUM_THREADS=1 -x OMP_PROC_BIND=true -x LD_LIBRARY_PATH=/global/home/groups/rdmaworkshop/offload_stack/ompi/lib:/global/home/groups/rdmaworkshop/offload_stack/nccl_rdma_sharp_plugin/lib:/global/home/groups/rdmaworkshop/offload_stack/hcoll/lib:/global/home/groups/rdmaworkshop/offload_stack/sharp/lib:/global/home/groups/rdmaworkshop/offload_stack/ucc.offload.sep23.x86_64/lib/ucc:/global/home/groups/rdmaworkshop/offload_stack/ucc.offload.sep23.x86_64/lib:/global/home/groups/rdmaworkshop/offload_stack/dpu.offload.sep23.x86_64/lib:/global/home/groups/rdmaworkshop/offload_stack/ucx.offload.sep23.x86_64/lib/ucx:/global/home/groups/rdmaworkshop/offload_stack/ucx.offload.sep23.x86_64/lib /global/home/groups/rdmaworkshop/offload_stack/ompi/tests/osu-micro-benchmarks-5.8/osu_allgatherv -f -m 256:1048576
+
+# OSU MPI Allgatherv Latency Test v5.8
+# Size       Avg Latency(us)   Min Latency(us)   Max Latency(us)  Iterations
+256                  1835.82           1826.81           1849.30        1000
+512                  1772.42           1762.96           1784.71        1000
+1024                 1771.06           1761.99           1785.55        1000
+2048                 1778.51           1768.03           1792.72        1000
+4096                 1779.49           1766.15           1794.37        1000
+8192                 1786.26           1771.69           1802.33        1000
+16384                1784.57           1762.39           1806.51         100
+32768                1806.08           1789.20           1825.49         100
+65536                2953.64           2910.42           3033.82         100
+131072               6005.69           5947.82           6158.57         100
+262144              12200.98          12092.07          12409.39         100
+524288              24845.62          24649.39          25131.77         100
+1048576             51377.30          50658.26          52396.19         100
+492.25user 365.03system 0:28.84elapsed 2971%CPU (0avgtext+0avgdata 356200maxresident)k
+0inputs+0outputs (135major+656518minor)pagefaults 0swaps
