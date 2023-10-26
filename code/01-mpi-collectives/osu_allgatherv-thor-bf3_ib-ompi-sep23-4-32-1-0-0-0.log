@@ -1,0 +1,24 @@
+Benchmark:           osu
+Test:                allgatherv
+TAG:                 sep23
+Cluster:             thor
+HOST list:           thor003:32,thor004:32,thor005:32,thor006:32, NNODES=4, PPN=32
+MPIRUN:              /global/home/groups/rdmaworkshop/offload_stack/ompi/bin/mpirun -np 128 -H thor003:32,thor004:32,thor005:32,thor006:32 --map-by ppr:32:node:pe=1,oversubscribe --bind-to core --rank-by core --mca pml ucx -x UCX_NET_DEVICES=mlx5_0:1 -x UCX_TLS=all -x UCX_LOG_LEVEL=warn -x UCX_LOG_PRINT_ENABLE=n -x UCX_LOG_LEVEL_TRIGGER=error -x UCX_HANDLE_ERRORS=bt --mca coll_hcoll_enable 0 --mca coll_hcoll_priority 100 --mca coll_ucc_enable 0 --mca coll_ucc_priority 100 -x UCC_LOG_LEVEL=warn -x OMP_NUM_THREADS=1 -x OMP_PROC_BIND=true -x LD_LIBRARY_PATH=/global/home/groups/rdmaworkshop/offload_stack/ompi/lib:/global/home/groups/rdmaworkshop/offload_stack/nccl_rdma_sharp_plugin/lib:/global/home/groups/rdmaworkshop/offload_stack/sharp/lib:/global/home/groups/rdmaworkshop/offload_stack/hcoll/lib:/global/home/groups/rdmaworkshop/offload_stack/ucc/lib/ucc:/global/home/groups/rdmaworkshop/offload_stack/ucc/lib:/global/home/groups/rdmaworkshop/offload_stack/ucx/lib/ucx:/global/home/groups/rdmaworkshop/offload_stack/ucx/lib /global/home/groups/rdmaworkshop/offload_stack/ompi/tests/osu-micro-benchmarks-5.8/osu_allgatherv -f -m 256:1048576
+
+# OSU MPI Allgatherv Latency Test v5.8
+# Size       Avg Latency(us)   Min Latency(us)   Max Latency(us)  Iterations
+256                    70.06             57.82             82.92        1000
+512                   123.30            105.12            143.26        1000
+1024                  201.79            196.39            209.67        1000
+2048                  249.27            243.40            260.60        1000
+4096                  318.53            312.00            330.52        1000
+8192                  467.29            464.52            473.00        1000
+16384                 980.58            966.49            998.10         100
+32768                2273.15           2258.04           2287.21         100
+65536                4571.37           4200.23           4948.37         100
+131072               9029.51           8442.58           9557.51         100
+262144              11807.27          11638.10          11951.59         100
+524288              24318.58          23848.71          24964.57         100
+1048576             53378.98          52914.88          53694.58         100
+183.21user 271.57system 0:18.21elapsed 2496%CPU (0avgtext+0avgdata 218224maxresident)k
+0inputs+0outputs (2839major+324769minor)pagefaults 0swaps

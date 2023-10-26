@@ -1,0 +1,26 @@
+Benchmark:           osu
+Test:                iallgatherv
+TAG:                 sep23
+Cluster:             thor
+HOST list:           thor003:32,thor004:32,thor005:32,thor006:32, NNODES=4, PPN=32
+MPIRUN:              /global/home/groups/rdmaworkshop/offload_stack/ompi/bin/mpirun -np 128 -H thor003:32,thor004:32,thor005:32,thor006:32 --map-by ppr:32:node:pe=1,oversubscribe --bind-to core --rank-by core --mca pml ucx -x UCX_NET_DEVICES=mlx5_0:1 -x UCX_TLS=all -x UCX_LOG_LEVEL=warn -x UCX_LOG_PRINT_ENABLE=n -x UCX_LOG_LEVEL_TRIGGER=error -x UCX_HANDLE_ERRORS=bt --mca coll_hcoll_enable 0 --mca coll_hcoll_priority 100 --mca coll_ucc_enable 0 --mca coll_ucc_priority 100 -x UCC_LOG_LEVEL=warn -x OMP_NUM_THREADS=1 -x OMP_PROC_BIND=true -x LD_LIBRARY_PATH=/global/home/groups/rdmaworkshop/offload_stack/ompi/lib:/global/home/groups/rdmaworkshop/offload_stack/nccl_rdma_sharp_plugin/lib:/global/home/groups/rdmaworkshop/offload_stack/sharp/lib:/global/home/groups/rdmaworkshop/offload_stack/hcoll/lib:/global/home/groups/rdmaworkshop/offload_stack/ucc/lib/ucc:/global/home/groups/rdmaworkshop/offload_stack/ucc/lib:/global/home/groups/rdmaworkshop/offload_stack/ucx/lib/ucx:/global/home/groups/rdmaworkshop/offload_stack/ucx/lib /global/home/groups/rdmaworkshop/offload_stack/ompi/tests/osu-micro-benchmarks-5.8/osu_iallgatherv -f -m 256:1048576
+
+# OSU MPI Non-blocking Allgatherv Latency Test v5.8
+# Overall = Coll. Init + Compute + MPI_Test + MPI_Wait
+
+# Size           Overall(us)       Compute(us)    Coll. Init(us)      MPI_Test(us)      MPI_Wait(us)    Pure Comm.(us)     Min Comm.(us)     Max Comm.(us)        Overlap(%)
+256                   536.79            273.48             43.31              0.00            219.83            264.19            260.50            261.99              0.33
+512                   621.36            325.72             45.33              0.00            250.14            314.80            312.26            316.35              6.08
+1024                  851.59            440.31             52.54              0.00            358.55            425.63            421.27            425.17              3.37
+2048                 1308.16            674.49             57.03              0.00            576.46            652.38            640.25            654.83              2.87
+4096                 2267.02           1188.13             72.06              0.00           1006.65           1149.58           1123.14           1148.71              6.15
+8192                 4342.92           2329.63            108.61              0.00           1904.48           2254.57           2214.81           2234.79             10.70
+16384               11559.74           5895.17             93.55              0.00           5570.82           5705.14           5792.61           6142.38              0.71
+32768               25147.70          11918.70            110.30              0.00          13118.50          11535.17          11730.76          11770.55              0.00
+65536               36880.63          18021.51            171.06              0.00          18687.83          17442.79          17494.09          17583.41              0.00
+131072              83414.20          40682.80            265.69              0.00          42465.29          39376.22          39510.47          39804.46              0.00
+262144             190312.26          81996.68            333.05              0.00         107982.10          79364.31          80122.94          80438.84              0.00
+524288             352851.62         169746.31            479.26              0.00         182625.59         164319.57         163075.83         165165.92              0.00
+1048576            581775.63         302311.31            896.28              0.00         278567.48         292655.89         292592.79         293914.02              4.51
+7136.34user 162.27system 3:50.13elapsed 3171%CPU (0avgtext+0avgdata 234144maxresident)k
+0inputs+0outputs (189major+575745minor)pagefaults 0swaps
