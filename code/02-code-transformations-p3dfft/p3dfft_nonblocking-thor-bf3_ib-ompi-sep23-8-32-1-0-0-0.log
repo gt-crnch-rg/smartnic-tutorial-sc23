@@ -1,0 +1,78 @@
+Benchmark:           p3dfft
+Test:                nonblocking
+TAG:                 sep23
+Cluster:             thor
+HOST list:           thor001:32,thor002:32,thor003:32,thor004:32,thor005:32,thor006:32,thor007:32,thor008:32, NNODES=8, PPN=32
+MPIRUN:              /global/home/groups/rdmaworkshop/offload_stack/ompi/bin/mpirun -np 256 -H thor001:32,thor002:32,thor003:32,thor004:32,thor005:32,thor006:32,thor007:32,thor008:32 --map-by ppr:32:node:pe=1,oversubscribe --bind-to core --rank-by core --mca pml ucx -x UCX_NET_DEVICES=mlx5_0:1 -x UCX_TLS=all -x UCX_LOG_LEVEL=warn -x UCX_LOG_PRINT_ENABLE=n -x UCX_LOG_LEVEL_TRIGGER=error -x UCX_HANDLE_ERRORS=bt --mca coll_hcoll_enable 0 --mca coll_hcoll_priority 100 --mca coll_ucc_enable 0 --mca coll_ucc_priority 100 -x UCC_LOG_LEVEL=warn -x OMP_NUM_THREADS=1 -x OMP_PROC_BIND=true -x LD_LIBRARY_PATH=/global/software/rocky-9.x86_64/modules/gcc/11/fftw/3.3.10-hpcx-2.15/lib:/global/home/groups/rdmaworkshop/offload_stack/ompi/lib:/global/home/groups/rdmaworkshop/offload_stack/nccl_rdma_sharp_plugin/lib:/global/home/groups/rdmaworkshop/offload_stack/sharp/lib:/global/home/groups/rdmaworkshop/offload_stack/hcoll/lib:/global/home/groups/rdmaworkshop/offload_stack/ucc/lib/ucc:/global/home/groups/rdmaworkshop/offload_stack/ucc/lib:/global/home/groups/rdmaworkshop/offload_stack/ucx/lib/ucx:/global/home/groups/rdmaworkshop/offload_stack/ucx/lib /global/home/groups/rdmaworkshop/p3dfft++/sample/C++/test3D_c2c_cpp
+P3DFFT++ C++ test program. Running on 256 cores
+GitVersion = v.3.1.2-19-g527915c-dirty
+GitDate = 2023-01-19
+Executable, test3D_c2c.C, was compiled with GCC/G++ (version 4674576) on Apr 18 2023 at 17:45:25
+P3DFFT test C2C, 3D wave input
+Double precision
+ (1024 1024 1024) grid
+ 2 proc. dimensions
+10 repetitions
+1 slices/streams
+4 variables
+Using two-dimensional decomposition
+Reading proc. grid from file dims
+Using processor grid 32 x 8
+Results are correct
+Max. diff. =1.80764e-16
+Results are correct
+Max. diff. =1.80764e-16
+Results are correct
+Max. diff. =1.80764e-16
+Results are correct
+Max. diff. =1.80764e-16
+Results are correct
+Max. diff. =1.80764e-16
+Results are correct
+Max. diff. =1.80764e-16
+Results are correct
+Max. diff. =1.80764e-16
+Results are correct
+Max. diff. =1.80764e-16
+Results are correct
+Max. diff. =1.80764e-16
+Results are correct
+Max. diff. =1.80764e-16
+Results are correct
+Max. diff. =1.44656e-15
+Transform time (avg/min/max): 7.202699 6.308231 7.718879
+                         Timer:   Average   Minimum     Maximum
+                    Unpack.0.1:     3.1366    1.80189    3.57619
+                  Exec.2.2.0.1:    2.35561    2.00702      2.788
+                Pack_trans.0.1: 0.000227019 0.000155962 0.000356053
+         Reorder_trans.102.012:   0.796145   0.764527   0.834378
+               MPI_Waitany.1.2:    2.05697    1.61922    3.76822
+            MPI_Ialltoallv.1.2:    4.42452     3.4697    4.79375
+               Exec.2.2.1024.1:    4.99878    4.40865    5.40557
+                Pack_trans.1.0: 0.000226007 0.000182532 0.000331273
+              Exec.2.2.1024.-1:    4.97881    4.30201    5.54616
+            MPI_Ialltoallv.0.1:   0.043014  0.0377908  0.0698417
+                Pack_trans.2.1: 0.000379756 0.000260033 0.000494864
+         Reorder_trans.120.102:     6.1923    5.64028    6.43937
+                    Unpack.1.0:    3.04489    1.65264    3.54075
+                    Unpack.1.2:    2.93797    2.67748    3.07454
+         Reorder_trans.012.102:    1.55207    1.47333    1.60514
+         Reorder_trans.102.120:    5.30239    4.55418    5.90459
+            MPI_Ialltoallv.2.1:   0.264612   0.243783   0.297864
+                 Exec.2.2.0.-1:    2.34817    2.02388    2.61265
+               MPI_Waitany.1.0:     7.8135    5.50003    10.9001
+                Pack_trans.1.2: 0.00025385 0.000177388 0.000355042
+            MPI_Ialltoallv.1.0:   0.645221   0.473846   0.702632
+               MPI_Waitany.2.1:    2.97877   0.750329    6.45644
+               MPI_Waitany.0.1:    6.85709    5.19765     9.5684
+                    Unpack.2.1:    2.60117    2.08581    3.01949
+Summaries:
+                        Unpack:    11.7206     9.5673    13.0599
+                          Exec:    14.6814    13.2346    15.7038
+                    Pack_trans: 0.00108663 0.000894775 0.00141598
+                 Reorder_trans:    13.8429     12.748      14.66
+                   MPI_Waitany:    19.7063     16.838    25.3758
+                MPI_Ialltoallv:    5.37737    4.37309    5.82054
+Sum total:    65.3297    56.7619    74.6215
+2216.00user 677.24system 1:36.63elapsed 2994%CPU (0avgtext+0avgdata 1993916maxresident)k
+0inputs+0outputs (2828major+21754186minor)pagefaults 0swaps
