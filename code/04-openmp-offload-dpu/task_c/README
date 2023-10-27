@@ -1,0 +1,6 @@
+Just run the command:
+
+sh compile.sh
+
+It will make a build direcotry and add
+shared objects and application binary in it.
