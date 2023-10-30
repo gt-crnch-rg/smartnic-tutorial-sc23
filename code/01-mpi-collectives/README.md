@@ -3,7 +3,7 @@ Instructions:
 1. `cd smartnic-tutorial-sc23/code/01-mpi-collectives`
 2. `vi run_osu.sh` (replace node sequence [001-004] with something available, always use four consecutive nodes in sections, ie., 001-004, 005-008, 009-012, 013-016, 017-020, 021-024, 025-028, 029-032)
 3. `sbatch run_osu.sh`
-4. wait for the job to complete (should finish within a few minutes after start running)
+4. wait for the job to complete (should finish within a few minutes after started running)
 5. `diff -y -W150 osu_allgatherv-thor-bf2_ib-ompi-sep23-4-32-1-0-0-0.log osu_allgatherv-thor-bf2_ib-ucc-sep23-4-32-1-4-4-4.log`
 ```
 # OSU MPI Allgatherv Latency Test v5.8                                  # OSU MPI Allgatherv Latency Test v5.8
@@ -24,5 +24,5 @@ Instructions:
 ```
 6. `vi run_osu.sh` (replace allgatherv with iallgatherv)
 7. repeat step 3-5
-8. can also experiment by replace "allgatherv" with "alltoall" or "alltoallv"
+8. can also experiment by replacing "allgatherv" with "alltoall" or "alltoallv"
 9. Why are we seeing what we are seeing?

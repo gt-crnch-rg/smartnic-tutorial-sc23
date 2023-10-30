@@ -1,0 +1,85 @@
+Benchmark:           p3dfft
+Test:                nonblocking
+TAG:                 sep23
+Cluster:             thor
+HOST list:           thor001:32,thor002:32,thor003:32,thor004:32,thor005:32,thor006:32,thor007:32,thor008:32, NNODES=8, PPN=32
+Offload mode:        bf3_ib
+Offload list:        thorbf3a001,thorbf3a002,thorbf3a003,thorbf3a004,thorbf3a005,thorbf3a006,thorbf3a007,thorbf3a008, SPN=4
+Offload daemon:      /global/home/groups/rdmaworkshop/offload_stack/dpu.offload.sep23.aarch64/bin/ucc_offload_dpu_daemon
+Offload config file: /global/home/groups/rdmaworkshop/offload_stack/etc/thor_bf3_4sp.cfg
+Offload Max sends:   4
+Offload Max recvs:   4
+Offload environment: UCX_NET_DEVICES=mlx5_0:1,UCX_TLS=rc_x,UCX_IB_TX_INLINE_RESP=64,UCX_ZCOPY_THRESH=256,UCX_RCACHE_ENABLE=y,UCX_LOG_LEVEL=warn,UCX_LOG_PRINT_ENABLE=n,UCX_LOG_LEVEL_TRIGGER=error,UCX_HANDLE_ERRORS=bt,DPU_OFFLOAD_LIST_DPUS=thorbf3a001,thorbf3a002,thorbf3a003,thorbf3a004,thorbf3a005,thorbf3a006,thorbf3a007,thorbf3a008,DPU_OFFLOAD_DBG_VERBOSE=0,OFFLOAD_CONFIG_FILE_PATH=/global/home/groups/rdmaworkshop/offload_stack/etc/thor_bf3_4sp.cfg,DPU_OFFLOAD_SERVICE_PROCESSES_PER_DPU=4,LD_LIBRARY_PATH=/global/home/groups/rdmaworkshop/offload_stack/dpu.offload.sep23.aarch64/lib:/global/home/groups/rdmaworkshop/offload_stack/ucx.offload.sep23.aarch64/lib}
+MPIRUN:              /global/home/groups/rdmaworkshop/offload_stack/ompi/bin/mpirun -np 256 -H thor001:32,thor002:32,thor003:32,thor004:32,thor005:32,thor006:32,thor007:32,thor008:32 --map-by ppr:32:node:pe=1,oversubscribe --bind-to core --rank-by core --mca btl ^openib --mca pml ucx -x UCX_NET_DEVICES=mlx5_0:1 -x UCX_TLS=all -x UCX_RCACHE_ENABLE=y -x UCX_LOG_LEVEL=warn -x UCX_LOG_PRINT_ENABLE=n -x UCX_LOG_LEVEL_TRIGGER=error -x UCX_HANDLE_ERRORS=bt --mca coll_hcoll_enable 0 --mca coll_hcoll_priority 100 -x HCOLL_ML_DISABLE_ALLTOALLV=1 -x HCOLL_ML_DISABLE_IALLTOALLV=1 --mca coll_ucc_enable 1 --mca coll_ucc_priority 100 -x UCC_LOG_LEVEL=warn -x UCC_TL_UCP_TUNE=allgatherv:0#alltoall:0#alltoallv:0-inf:@dpu_onesided -x UCC_TL_UCP_OFFLOAD_DPU_MAX_SENDS=4 -x UCC_TL_UCP_OFFLOAD_DPU_MAX_RECVS=4 -x OFFLOAD_CONFIG_FILE_PATH=/global/home/groups/rdmaworkshop/offload_stack/etc/thor_bf3_4sp.cfg -x DPU_OFFLOAD_DBG_VERBOSE=0 -x OMP_NUM_THREADS=1 -x OMP_PROC_BIND=true -x LD_LIBRARY_PATH=/global/software/rocky-9.x86_64/modules/gcc/11/fftw/3.3.10-hpcx-2.15/lib:/global/home/groups/rdmaworkshop/offload_stack/ompi/lib:/global/home/groups/rdmaworkshop/offload_stack/nccl_rdma_sharp_plugin/lib:/global/home/groups/rdmaworkshop/offload_stack/hcoll/lib:/global/home/groups/rdmaworkshop/offload_stack/sharp/lib:/global/home/groups/rdmaworkshop/offload_stack/ucc.offload.sep23.x86_64/lib/ucc:/global/home/groups/rdmaworkshop/offload_stack/ucc.offload.sep23.x86_64/lib:/global/home/groups/rdmaworkshop/offload_stack/dpu.offload.sep23.x86_64/lib:/global/home/groups/rdmaworkshop/offload_stack/ucx.offload.sep23.x86_64/lib/ucx:/global/home/groups/rdmaworkshop/offload_stack/ucx.offload.sep23.x86_64/lib /global/home/groups/rdmaworkshop/p3dfft++/sample/C++/test3D_c2c_cpp
+P3DFFT++ C++ test program. Running on 256 cores
+GitVersion = v.3.1.2-19-g527915c-dirty
+GitDate = 2023-01-19
+Executable, test3D_c2c.C, was compiled with GCC/G++ (version 4674576) on Apr 18 2023 at 17:45:25
+P3DFFT test C2C, 3D wave input
+Double precision
+ (1024 1024 1024) grid
+ 2 proc. dimensions
+10 repetitions
+1 slices/streams
+4 variables
+Using two-dimensional decomposition
+Reading proc. grid from file dims
+Using processor grid 32 x 8
+Results are correct
+Max. diff. =1.79676e-16
+Results are correct
+Max. diff. =1.79676e-16
+Results are correct
+Max. diff. =1.79676e-16
+Results are correct
+Max. diff. =1.79676e-16
+Results are correct
+Max. diff. =1.79676e-16
+Results are correct
+Max. diff. =1.79676e-16
+Results are correct
+Max. diff. =1.79676e-16
+Results are correct
+Max. diff. =1.79676e-16
+Results are correct
+Max. diff. =1.79676e-16
+Results are correct
+Max. diff. =1.79676e-16
+Results are correct
+Max. diff. =1.33948e-15
+Transform time (avg/min/max): 5.616796 5.486121 5.724293
+                         Timer:   Average   Minimum     Maximum
+                    Unpack.0.1:    3.28269    3.00259    3.44585
+                  Exec.2.2.0.1:    2.41682    2.13543    2.67119
+                Pack_trans.0.1: 0.000257295 0.000190222 0.000347571
+         Reorder_trans.102.012:   0.838319   0.789352   0.917246
+               MPI_Waitany.1.2:   0.396579 0.00112091    1.41688
+            MPI_Ialltoallv.1.2:    1.46376    1.12464     1.7649
+               Exec.2.2.1024.1:    5.32945       4.76    5.64563
+                Pack_trans.1.0: 0.000289019 0.000240509 0.000348271
+              Exec.2.2.1024.-1:    5.49636    4.82098    5.87521
+            MPI_Ialltoallv.0.1:    0.01444  0.0132711  0.0163624
+                Pack_trans.2.1: 0.000425807 0.000363369 0.000532686
+         Reorder_trans.120.102:    6.98004    6.55902     7.3332
+                    Unpack.1.0:    2.88132    2.61921    3.14391
+                    Unpack.1.2:    2.89202    2.48829    3.13837
+         Reorder_trans.012.102:    1.76114     1.6554    1.89676
+         Reorder_trans.102.120:    6.30522    6.01488    6.65927
+            MPI_Ialltoallv.2.1:  0.0867294  0.0805502  0.0939864
+                 Exec.2.2.0.-1:    2.43417    2.17144    2.61621
+               MPI_Waitany.1.0:    4.05679    3.61609    4.78988
+                Pack_trans.1.2: 0.000463956 0.000305009  0.0235834
+            MPI_Ialltoallv.1.0:    1.16803   0.971153    1.34824
+               MPI_Waitany.2.1:   0.480145 0.000936985    1.32398
+               MPI_Waitany.0.1:    5.05651    4.29357    6.23352
+                    Unpack.2.1:    2.75281    2.37998    3.05244
+Summaries:
+                        Unpack:    11.8088    10.9925    12.4476
+                          Exec:    15.6768    14.1369    16.4848
+                    Pack_trans: 0.00143608 0.00118056  0.0245454
+                 Reorder_trans:    15.8847    15.2791    16.6463
+                   MPI_Waitany:    9.99002    8.63297    11.9364
+                MPI_Ialltoallv:    2.73296    2.28229    3.18467
+Sum total:    56.0948    51.3249    60.7244
+1915.82user 295.68system 1:13.66elapsed 3002%CPU (0avgtext+0avgdata 2412356maxresident)k
+0inputs+0outputs (761major+5748242minor)pagefaults 0swaps

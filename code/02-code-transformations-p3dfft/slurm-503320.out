@@ -1,0 +1,438 @@
+Benchmark:           p3dfft
+Test:                nonblocking
+TAG:                 sep23
+Cluster:             thor
+HOST list:           thor001:32,thor002:32,thor003:32,thor004:32,thor005:32,thor006:32,thor007:32,thor008:32, NNODES=8, PPN=32
+MPIRUN:              /global/home/groups/rdmaworkshop/offload_stack/ompi/bin/mpirun -np 256 -H thor001:32,thor002:32,thor003:32,thor004:32,thor005:32,thor006:32,thor007:32,thor008:32 --map-by ppr:32:node:pe=1,oversubscribe --bind-to core --rank-by core --mca pml ucx -x UCX_NET_DEVICES=mlx5_0:1 -x UCX_TLS=all -x UCX_LOG_LEVEL=warn -x UCX_LOG_PRINT_ENABLE=n -x UCX_LOG_LEVEL_TRIGGER=error -x UCX_HANDLE_ERRORS=bt --mca coll_hcoll_enable 0 --mca coll_hcoll_priority 100 --mca coll_ucc_enable 0 --mca coll_ucc_priority 100 -x UCC_LOG_LEVEL=warn -x OMP_NUM_THREADS=1 -x OMP_PROC_BIND=true -x LD_LIBRARY_PATH=/global/software/rocky-9.x86_64/modules/gcc/11/fftw/3.3.10-hpcx-2.15/lib:/global/home/groups/rdmaworkshop/offload_stack/ompi/lib:/global/home/groups/rdmaworkshop/offload_stack/nccl_rdma_sharp_plugin/lib:/global/home/groups/rdmaworkshop/offload_stack/sharp/lib:/global/home/groups/rdmaworkshop/offload_stack/hcoll/lib:/global/home/groups/rdmaworkshop/offload_stack/ucc/lib/ucc:/global/home/groups/rdmaworkshop/offload_stack/ucc/lib:/global/home/groups/rdmaworkshop/offload_stack/ucx/lib/ucx:/global/home/groups/rdmaworkshop/offload_stack/ucx/lib /global/home/groups/rdmaworkshop/p3dfft++/sample/C++/test3D_c2c_cpp
+P3DFFT++ C++ test program. Running on 256 cores
+GitVersion = v.3.1.2-19-g527915c-dirty
+GitDate = 2023-01-19
+Executable, test3D_c2c.C, was compiled with GCC/G++ (version 4674576) on Apr 18 2023 at 17:45:25
+P3DFFT test C2C, 3D wave input
+Double precision
+ (1024 1024 1024) grid
+ 2 proc. dimensions
+10 repetitions
+1 slices/streams
+4 variables
+Using two-dimensional decomposition
+Reading proc. grid from file dims
+Using processor grid 32 x 8
+Results are correct
+Max. diff. =1.80764e-16
+Results are correct
+Max. diff. =1.80764e-16
+Results are correct
+Max. diff. =1.80764e-16
+Results are correct
+Max. diff. =1.80764e-16
+Results are correct
+Max. diff. =1.80764e-16
+Results are correct
+Max. diff. =1.80764e-16
+Results are correct
+Max. diff. =1.80764e-16
+Results are correct
+Max. diff. =1.80764e-16
+Results are correct
+Max. diff. =1.80764e-16
+Results are correct
+Max. diff. =1.80764e-16
+Results are correct
+Max. diff. =1.44656e-15
+Transform time (avg/min/max): 7.202699 6.308231 7.718879
+                         Timer:   Average   Minimum     Maximum
+                    Unpack.0.1:     3.1366    1.80189    3.57619
+                  Exec.2.2.0.1:    2.35561    2.00702      2.788
+                Pack_trans.0.1: 0.000227019 0.000155962 0.000356053
+         Reorder_trans.102.012:   0.796145   0.764527   0.834378
+               MPI_Waitany.1.2:    2.05697    1.61922    3.76822
+            MPI_Ialltoallv.1.2:    4.42452     3.4697    4.79375
+               Exec.2.2.1024.1:    4.99878    4.40865    5.40557
+                Pack_trans.1.0: 0.000226007 0.000182532 0.000331273
+              Exec.2.2.1024.-1:    4.97881    4.30201    5.54616
+            MPI_Ialltoallv.0.1:   0.043014  0.0377908  0.0698417
+                Pack_trans.2.1: 0.000379756 0.000260033 0.000494864
+         Reorder_trans.120.102:     6.1923    5.64028    6.43937
+                    Unpack.1.0:    3.04489    1.65264    3.54075
+                    Unpack.1.2:    2.93797    2.67748    3.07454
+         Reorder_trans.012.102:    1.55207    1.47333    1.60514
+         Reorder_trans.102.120:    5.30239    4.55418    5.90459
+            MPI_Ialltoallv.2.1:   0.264612   0.243783   0.297864
+                 Exec.2.2.0.-1:    2.34817    2.02388    2.61265
+               MPI_Waitany.1.0:     7.8135    5.50003    10.9001
+                Pack_trans.1.2: 0.00025385 0.000177388 0.000355042
+            MPI_Ialltoallv.1.0:   0.645221   0.473846   0.702632
+               MPI_Waitany.2.1:    2.97877   0.750329    6.45644
+               MPI_Waitany.0.1:    6.85709    5.19765     9.5684
+                    Unpack.2.1:    2.60117    2.08581    3.01949
+Summaries:
+                        Unpack:    11.7206     9.5673    13.0599
+                          Exec:    14.6814    13.2346    15.7038
+                    Pack_trans: 0.00108663 0.000894775 0.00141598
+                 Reorder_trans:    13.8429     12.748      14.66
+                   MPI_Waitany:    19.7063     16.838    25.3758
+                MPI_Ialltoallv:    5.37737    4.37309    5.82054
+Sum total:    65.3297    56.7619    74.6215
+2216.00user 677.24system 1:36.63elapsed 2994%CPU (0avgtext+0avgdata 1993916maxresident)k
+0inputs+0outputs (2828major+21754186minor)pagefaults 0swaps
+Benchmark:           p3dfft
+Test:                nonblocking
+TAG:                 sep23
+Cluster:             thor
+HOST list:           thor001:32,thor002:32,thor003:32,thor004:32,thor005:32,thor006:32,thor007:32,thor008:32, NNODES=8, PPN=32
+Offload mode:        bf3_ib
+Offload list:        thorbf3a001,thorbf3a002,thorbf3a003,thorbf3a004,thorbf3a005,thorbf3a006,thorbf3a007,thorbf3a008, SPN=4
+Offload daemon:      /global/home/groups/rdmaworkshop/offload_stack/dpu.offload.sep23.aarch64/bin/ucc_offload_dpu_daemon
+Offload config file: /global/home/groups/rdmaworkshop/offload_stack/etc/thor_bf3_4sp.cfg
+Offload Max sends:   4
+Offload Max recvs:   4
+Offload environment: UCX_NET_DEVICES=mlx5_0:1,UCX_TLS=rc_x,UCX_IB_TX_INLINE_RESP=64,UCX_ZCOPY_THRESH=256,UCX_RCACHE_ENABLE=y,UCX_LOG_LEVEL=warn,UCX_LOG_PRINT_ENABLE=n,UCX_LOG_LEVEL_TRIGGER=error,UCX_HANDLE_ERRORS=bt,DPU_OFFLOAD_LIST_DPUS=thorbf3a001,thorbf3a002,thorbf3a003,thorbf3a004,thorbf3a005,thorbf3a006,thorbf3a007,thorbf3a008,DPU_OFFLOAD_DBG_VERBOSE=0,OFFLOAD_CONFIG_FILE_PATH=/global/home/groups/rdmaworkshop/offload_stack/etc/thor_bf3_4sp.cfg,DPU_OFFLOAD_SERVICE_PROCESSES_PER_DPU=4,LD_LIBRARY_PATH=/global/home/groups/rdmaworkshop/offload_stack/dpu.offload.sep23.aarch64/lib:/global/home/groups/rdmaworkshop/offload_stack/ucx.offload.sep23.aarch64/lib}
+MPIRUN:              /global/home/groups/rdmaworkshop/offload_stack/ompi/bin/mpirun -np 256 -H thor001:32,thor002:32,thor003:32,thor004:32,thor005:32,thor006:32,thor007:32,thor008:32 --map-by ppr:32:node:pe=1,oversubscribe --bind-to core --rank-by core --mca btl ^openib --mca pml ucx -x UCX_NET_DEVICES=mlx5_0:1 -x UCX_TLS=all -x UCX_RCACHE_ENABLE=y -x UCX_LOG_LEVEL=warn -x UCX_LOG_PRINT_ENABLE=n -x UCX_LOG_LEVEL_TRIGGER=error -x UCX_HANDLE_ERRORS=bt --mca coll_hcoll_enable 0 --mca coll_hcoll_priority 100 -x HCOLL_ML_DISABLE_ALLTOALLV=1 -x HCOLL_ML_DISABLE_IALLTOALLV=1 --mca coll_ucc_enable 1 --mca coll_ucc_priority 100 -x UCC_LOG_LEVEL=warn -x UCC_TL_UCP_TUNE=allgatherv:0#alltoall:0#alltoallv:0-inf:@dpu_onesided -x UCC_TL_UCP_OFFLOAD_DPU_MAX_SENDS=4 -x UCC_TL_UCP_OFFLOAD_DPU_MAX_RECVS=4 -x OFFLOAD_CONFIG_FILE_PATH=/global/home/groups/rdmaworkshop/offload_stack/etc/thor_bf3_4sp.cfg -x DPU_OFFLOAD_DBG_VERBOSE=0 -x OMP_NUM_THREADS=1 -x OMP_PROC_BIND=true -x LD_LIBRARY_PATH=/global/software/rocky-9.x86_64/modules/gcc/11/fftw/3.3.10-hpcx-2.15/lib:/global/home/groups/rdmaworkshop/offload_stack/ompi/lib:/global/home/groups/rdmaworkshop/offload_stack/nccl_rdma_sharp_plugin/lib:/global/home/groups/rdmaworkshop/offload_stack/hcoll/lib:/global/home/groups/rdmaworkshop/offload_stack/sharp/lib:/global/home/groups/rdmaworkshop/offload_stack/ucc.offload.sep23.x86_64/lib/ucc:/global/home/groups/rdmaworkshop/offload_stack/ucc.offload.sep23.x86_64/lib:/global/home/groups/rdmaworkshop/offload_stack/dpu.offload.sep23.x86_64/lib:/global/home/groups/rdmaworkshop/offload_stack/ucx.offload.sep23.x86_64/lib/ucx:/global/home/groups/rdmaworkshop/offload_stack/ucx.offload.sep23.x86_64/lib /global/home/groups/rdmaworkshop/p3dfft++/sample/C++/test3D_c2c_cpp
+P3DFFT++ C++ test program. Running on 256 cores
+GitVersion = v.3.1.2-19-g527915c-dirty
+GitDate = 2023-01-19
+Executable, test3D_c2c.C, was compiled with GCC/G++ (version 4674576) on Apr 18 2023 at 17:45:25
+P3DFFT test C2C, 3D wave input
+Double precision
+ (1024 1024 1024) grid
+ 2 proc. dimensions
+10 repetitions
+1 slices/streams
+4 variables
+Using two-dimensional decomposition
+Reading proc. grid from file dims
+Using processor grid 32 x 8
+Results are correct
+Max. diff. =1.79676e-16
+Results are correct
+Max. diff. =1.79676e-16
+Results are correct
+Max. diff. =1.79676e-16
+Results are correct
+Max. diff. =1.79676e-16
+Results are correct
+Max. diff. =1.79676e-16
+Results are correct
+Max. diff. =1.79676e-16
+Results are correct
+Max. diff. =1.79676e-16
+Results are correct
+Max. diff. =1.79676e-16
+Results are correct
+Max. diff. =1.79676e-16
+Results are correct
+Max. diff. =1.79676e-16
+Results are correct
+Max. diff. =1.33948e-15
+Transform time (avg/min/max): 5.616796 5.486121 5.724293
+                         Timer:   Average   Minimum     Maximum
+                    Unpack.0.1:    3.28269    3.00259    3.44585
+                  Exec.2.2.0.1:    2.41682    2.13543    2.67119
+                Pack_trans.0.1: 0.000257295 0.000190222 0.000347571
+         Reorder_trans.102.012:   0.838319   0.789352   0.917246
+               MPI_Waitany.1.2:   0.396579 0.00112091    1.41688
+            MPI_Ialltoallv.1.2:    1.46376    1.12464     1.7649
+               Exec.2.2.1024.1:    5.32945       4.76    5.64563
+                Pack_trans.1.0: 0.000289019 0.000240509 0.000348271
+              Exec.2.2.1024.-1:    5.49636    4.82098    5.87521
+            MPI_Ialltoallv.0.1:    0.01444  0.0132711  0.0163624
+                Pack_trans.2.1: 0.000425807 0.000363369 0.000532686
+         Reorder_trans.120.102:    6.98004    6.55902     7.3332
+                    Unpack.1.0:    2.88132    2.61921    3.14391
+                    Unpack.1.2:    2.89202    2.48829    3.13837
+         Reorder_trans.012.102:    1.76114     1.6554    1.89676
+         Reorder_trans.102.120:    6.30522    6.01488    6.65927
+            MPI_Ialltoallv.2.1:  0.0867294  0.0805502  0.0939864
+                 Exec.2.2.0.-1:    2.43417    2.17144    2.61621
+               MPI_Waitany.1.0:    4.05679    3.61609    4.78988
+                Pack_trans.1.2: 0.000463956 0.000305009  0.0235834
+            MPI_Ialltoallv.1.0:    1.16803   0.971153    1.34824
+               MPI_Waitany.2.1:   0.480145 0.000936985    1.32398
+               MPI_Waitany.0.1:    5.05651    4.29357    6.23352
+                    Unpack.2.1:    2.75281    2.37998    3.05244
+Summaries:
+                        Unpack:    11.8088    10.9925    12.4476
+                          Exec:    15.6768    14.1369    16.4848
+                    Pack_trans: 0.00143608 0.00118056  0.0245454
+                 Reorder_trans:    15.8847    15.2791    16.6463
+                   MPI_Waitany:    9.99002    8.63297    11.9364
+                MPI_Ialltoallv:    2.73296    2.28229    3.18467
+Sum total:    56.0948    51.3249    60.7244
+1915.82user 295.68system 1:13.66elapsed 3002%CPU (0avgtext+0avgdata 2412356maxresident)k
+0inputs+0outputs (761major+5748242minor)pagefaults 0swaps
+srun: error: thorbf3a001: task 0: Terminated
+srun: Force Terminated StepId=503320.12
+srun: error: thorbf3a001: task 0: Terminated
+srun: Force Terminated StepId=503320.13
+srun: error: thorbf3a001: task 0: Terminated
+srun: Force Terminated StepId=503320.10
+srun: error: thorbf3a001: task 0: Terminated
+srun: Force Terminated StepId=503320.11
+srun: error: thorbf3a002: task 0: Terminated
+srun: Force Terminated StepId=503320.17
+srun: error: thorbf3a002: task 0: Terminated
+srun: Force Terminated StepId=503320.14
+srun: error: thorbf3a002: task 0: Terminated
+srun: Force Terminated StepId=503320.16
+srun: error: thorbf3a002: task 0: Terminated
+srun: Force Terminated StepId=503320.15
+srun: error: thorbf3a003: task 0: Terminated
+srun: Force Terminated StepId=503320.19
+srun: error: thorbf3a003: task 0: Terminated
+srun: Force Terminated StepId=503320.21
+srun: error: thorbf3a003: task 0: Terminated
+srun: Force Terminated StepId=503320.20
+srun: error: thorbf3a003: task 0: Terminated
+srun: Force Terminated StepId=503320.18
+srun: error: thorbf3a004: task 0: Terminated
+srun: Force Terminated StepId=503320.22
+srun: error: thorbf3a004: task 0: Terminated
+srun: Force Terminated StepId=503320.25
+srun: error: thorbf3a004: task 0: Terminated
+srun: Force Terminated StepId=503320.23
+srun: error: thorbf3a004: task 0: Terminated
+srun: Force Terminated StepId=503320.24
+srun: error: thorbf3a005: task 0: Terminated
+srun: Force Terminated StepId=503320.27
+srun: error: thorbf3a005: task 0: Terminated
+srun: Force Terminated StepId=503320.26
+srun: error: thorbf3a005: task 0: Terminated
+srun: Force Terminated StepId=503320.28
+srun: error: thorbf3a005: task 0: Terminated
+srun: Force Terminated StepId=503320.29
+Benchmark:           p3dfft
+Test:                nonblocking
+TAG:                 sep23
+Cluster:             thor
+HOST list:           thor001:32,thor002:32,thor003:32,thor004:32,thor005:32,thor006:32,thor007:32,thor008:32, NNODES=8, PPN=32
+srun: error: thorbf3a006: task 0: Terminated
+srun: error: thorbf3a006: task 0: Terminated
+srun: Force Terminated StepId=503320.31
+srun: Force Terminated StepId=503320.32
+srun: error: thorbf3a006: task 0: Terminated
+srun: Force Terminated StepId=503320.30
+srun: error: thorbf3a006: task 0: Terminated
+srun: Force Terminated StepId=503320.33
+MPIRUN:              /global/home/groups/rdmaworkshop/offload_stack/ompi/bin/mpirun -np 256 -H thor001:32,thor002:32,thor003:32,thor004:32,thor005:32,thor006:32,thor007:32,thor008:32 --map-by ppr:32:node:pe=1,oversubscribe --bind-to core --rank-by core --mca pml ucx -x UCX_NET_DEVICES=mlx5_2:1 -x UCX_TLS=all -x UCX_LOG_LEVEL=warn -x UCX_LOG_PRINT_ENABLE=n -x UCX_LOG_LEVEL_TRIGGER=error -x UCX_HANDLE_ERRORS=bt --mca coll_hcoll_enable 0 --mca coll_hcoll_priority 100 --mca coll_ucc_enable 0 --mca coll_ucc_priority 100 -x UCC_LOG_LEVEL=warn -x OMP_NUM_THREADS=1 -x OMP_PROC_BIND=true -x LD_LIBRARY_PATH=/global/software/rocky-9.x86_64/modules/gcc/11/fftw/3.3.10-hpcx-2.15/lib:/global/home/groups/rdmaworkshop/offload_stack/ompi/lib:/global/home/groups/rdmaworkshop/offload_stack/nccl_rdma_sharp_plugin/lib:/global/home/groups/rdmaworkshop/offload_stack/sharp/lib:/global/home/groups/rdmaworkshop/offload_stack/hcoll/lib:/global/home/groups/rdmaworkshop/offload_stack/ucc/lib/ucc:/global/home/groups/rdmaworkshop/offload_stack/ucc/lib:/global/home/groups/rdmaworkshop/offload_stack/ucx/lib/ucx:/global/home/groups/rdmaworkshop/offload_stack/ucx/lib /global/home/groups/rdmaworkshop/p3dfft++/sample/C++/test3D_c2c_cpp
+srun: error: thorbf3a007: task 0: Terminated
+srun: Force Terminated StepId=503320.36
+srun: error: thorbf3a007: task 0: Terminated
+srun: Force Terminated StepId=503320.34
+srun: error: thorbf3a007: task 0: Terminated
+srun: Force Terminated StepId=503320.38
+srun: error: thorbf3a007: task 0: Terminated
+srun: Force Terminated StepId=503320.35
+srun: error: thorbf3a008: task 0: Terminated
+srun: Force Terminated StepId=503320.41
+srun: error: thorbf3a008: task 0: Terminated
+srun: Force Terminated StepId=503320.37
+srun: error: thorbf3a008: task 0: Terminated
+srun: Force Terminated StepId=503320.40
+srun: error: thorbf3a008: task 0: Terminated
+srun: Force Terminated StepId=503320.39
+P3DFFT++ C++ test program. Running on 256 cores
+GitVersion = v.3.1.2-19-g527915c-dirty
+GitDate = 2023-01-19
+Executable, test3D_c2c.C, was compiled with GCC/G++ (version 4674576) on Apr 18 2023 at 17:45:25
+P3DFFT test C2C, 3D wave input
+Double precision
+ (1024 1024 1024) grid
+ 2 proc. dimensions
+10 repetitions
+1 slices/streams
+4 variables
+Using two-dimensional decomposition
+Reading proc. grid from file dims
+Using processor grid 32 x 8
+Results are correct
+Max. diff. =1.79239e-16
+Results are correct
+Max. diff. =1.79239e-16
+Results are correct
+Max. diff. =1.79239e-16
+Results are correct
+Max. diff. =1.79239e-16
+Results are correct
+Max. diff. =1.79239e-16
+Results are correct
+Max. diff. =1.79239e-16
+Results are correct
+Max. diff. =1.79239e-16
+Results are correct
+Max. diff. =1.79239e-16
+Results are correct
+Max. diff. =1.79239e-16
+Results are correct
+Max. diff. =1.79239e-16
+Results are correct
+Max. diff. =1.44436e-15
+Transform time (avg/min/max): 7.481128 6.575452 8.032366
+                         Timer:   Average   Minimum     Maximum
+                    Unpack.0.1:    3.12075     1.6245    3.61863
+                  Exec.2.2.0.1:    2.35953     2.1129    2.63687
+                Pack_trans.0.1: 0.000226135 0.000162551 0.000343491
+         Reorder_trans.102.012:   0.797769   0.769978   0.832987
+               MPI_Waitany.1.2:    2.05583    1.60276    3.18594
+            MPI_Ialltoallv.1.2:    4.43954    3.66261    4.80194
+               Exec.2.2.1024.1:    4.99142    4.44456    5.43556
+                Pack_trans.1.0: 0.00022529 0.000182158 0.000336191
+              Exec.2.2.1024.-1:    5.04438     4.4975    5.39179
+            MPI_Ialltoallv.0.1:  0.0431067  0.0372889  0.0696795
+                Pack_trans.2.1: 0.000398716 0.000326571 0.000503856
+         Reorder_trans.120.102:    6.20917    5.86413    6.42019
+                    Unpack.1.0:     3.0898    1.58082    3.50729
+                    Unpack.1.2:    2.94086    2.66729    3.08665
+         Reorder_trans.012.102:     1.5515    1.46322    1.61979
+         Reorder_trans.102.120:    5.57862     5.2885    5.95564
+            MPI_Ialltoallv.2.1:   0.272016   0.259144   0.310648
+                 Exec.2.2.0.-1:     2.3949    2.11004    2.62213
+               MPI_Waitany.1.0:    8.55982    5.71988    10.1318
+                Pack_trans.1.2: 0.000250469 0.000189867 0.000348291
+            MPI_Ialltoallv.1.0:   0.644708   0.472594   0.706241
+               MPI_Waitany.2.1:    1.72095   0.839803    5.82684
+               MPI_Waitany.0.1:    8.04432    5.66161    10.0371
+                    Unpack.2.1:    2.79125    2.53177     2.9473
+Summaries:
+                        Unpack:    11.9427    9.04632    12.9786
+                          Exec:    14.7902    13.3462    15.6343
+                    Pack_trans: 0.00110061 0.000916594 0.00142704
+                 Reorder_trans:    14.1371    13.7326    14.6601
+                   MPI_Waitany:    20.3809     15.558     25.039
+                MPI_Ialltoallv:    5.39938    4.59388    5.80872
+Sum total:    66.6514    56.2779    74.1221
+2247.60user 672.65system 1:35.01elapsed 3073%CPU (0avgtext+0avgdata 1986884maxresident)k
+0inputs+0outputs (218major+21685202minor)pagefaults 0swaps
+Benchmark:           p3dfft
+Test:                nonblocking
+TAG:                 sep23
+Cluster:             thor
+HOST list:           thor001:32,thor002:32,thor003:32,thor004:32,thor005:32,thor006:32,thor007:32,thor008:32, NNODES=8, PPN=32
+Offload mode:        bf2_ib
+Offload list:        thorbf2a001,thorbf2a002,thorbf2a003,thorbf2a004,thorbf2a005,thorbf2a006,thorbf2a007,thorbf2a008, SPN=4
+Offload daemon:      /global/home/groups/rdmaworkshop/offload_stack/dpu.offload.sep23.aarch64/bin/ucc_offload_dpu_daemon
+Offload config file: /global/home/groups/rdmaworkshop/offload_stack/etc/thor_bf2_4sp.cfg
+Offload Max sends:   4
+Offload Max recvs:   4
+Offload environment: UCX_NET_DEVICES=mlx5_0:1,UCX_TLS=rc_x,UCX_IB_TX_INLINE_RESP=64,UCX_ZCOPY_THRESH=256,UCX_RCACHE_ENABLE=y,UCX_LOG_LEVEL=warn,UCX_LOG_PRINT_ENABLE=n,UCX_LOG_LEVEL_TRIGGER=error,UCX_HANDLE_ERRORS=bt,DPU_OFFLOAD_LIST_DPUS=thorbf2a001,thorbf2a002,thorbf2a003,thorbf2a004,thorbf2a005,thorbf2a006,thorbf2a007,thorbf2a008,DPU_OFFLOAD_DBG_VERBOSE=0,OFFLOAD_CONFIG_FILE_PATH=/global/home/groups/rdmaworkshop/offload_stack/etc/thor_bf2_4sp.cfg,DPU_OFFLOAD_SERVICE_PROCESSES_PER_DPU=4,LD_LIBRARY_PATH=/global/home/groups/rdmaworkshop/offload_stack/dpu.offload.sep23.aarch64/lib:/global/home/groups/rdmaworkshop/offload_stack/ucx.offload.sep23.aarch64/lib}
+MPIRUN:              /global/home/groups/rdmaworkshop/offload_stack/ompi/bin/mpirun -np 256 -H thor001:32,thor002:32,thor003:32,thor004:32,thor005:32,thor006:32,thor007:32,thor008:32 --map-by ppr:32:node:pe=1,oversubscribe --bind-to core --rank-by core --mca btl ^openib --mca pml ucx -x UCX_NET_DEVICES=mlx5_2:1 -x UCX_TLS=all -x UCX_RCACHE_ENABLE=y -x UCX_LOG_LEVEL=warn -x UCX_LOG_PRINT_ENABLE=n -x UCX_LOG_LEVEL_TRIGGER=error -x UCX_HANDLE_ERRORS=bt --mca coll_hcoll_enable 0 --mca coll_hcoll_priority 100 -x HCOLL_ML_DISABLE_ALLTOALLV=1 -x HCOLL_ML_DISABLE_IALLTOALLV=1 --mca coll_ucc_enable 1 --mca coll_ucc_priority 100 -x UCC_LOG_LEVEL=warn -x UCC_TL_UCP_TUNE=allgatherv:0#alltoall:0#alltoallv:0-inf:@dpu_onesided -x UCC_TL_UCP_OFFLOAD_DPU_MAX_SENDS=4 -x UCC_TL_UCP_OFFLOAD_DPU_MAX_RECVS=4 -x OFFLOAD_CONFIG_FILE_PATH=/global/home/groups/rdmaworkshop/offload_stack/etc/thor_bf2_4sp.cfg -x DPU_OFFLOAD_DBG_VERBOSE=0 -x OMP_NUM_THREADS=1 -x OMP_PROC_BIND=true -x LD_LIBRARY_PATH=/global/software/rocky-9.x86_64/modules/gcc/11/fftw/3.3.10-hpcx-2.15/lib:/global/home/groups/rdmaworkshop/offload_stack/ompi/lib:/global/home/groups/rdmaworkshop/offload_stack/nccl_rdma_sharp_plugin/lib:/global/home/groups/rdmaworkshop/offload_stack/hcoll/lib:/global/home/groups/rdmaworkshop/offload_stack/sharp/lib:/global/home/groups/rdmaworkshop/offload_stack/ucc.offload.sep23.x86_64/lib/ucc:/global/home/groups/rdmaworkshop/offload_stack/ucc.offload.sep23.x86_64/lib:/global/home/groups/rdmaworkshop/offload_stack/dpu.offload.sep23.x86_64/lib:/global/home/groups/rdmaworkshop/offload_stack/ucx.offload.sep23.x86_64/lib/ucx:/global/home/groups/rdmaworkshop/offload_stack/ucx.offload.sep23.x86_64/lib /global/home/groups/rdmaworkshop/p3dfft++/sample/C++/test3D_c2c_cpp
+P3DFFT++ C++ test program. Running on 256 cores
+GitVersion = v.3.1.2-19-g527915c-dirty
+GitDate = 2023-01-19
+Executable, test3D_c2c.C, was compiled with GCC/G++ (version 4674576) on Apr 18 2023 at 17:45:25
+P3DFFT test C2C, 3D wave input
+Double precision
+ (1024 1024 1024) grid
+ 2 proc. dimensions
+10 repetitions
+1 slices/streams
+4 variables
+Using two-dimensional decomposition
+Reading proc. grid from file dims
+Using processor grid 32 x 8
+Results are correct
+Max. diff. =1.80603e-16
+Results are correct
+Max. diff. =1.80603e-16
+Results are correct
+Max. diff. =1.80603e-16
+Results are correct
+Max. diff. =1.80603e-16
+Results are correct
+Max. diff. =1.80603e-16
+Results are correct
+Max. diff. =1.80603e-16
+Results are correct
+Max. diff. =1.80603e-16
+Results are correct
+Max. diff. =1.80603e-16
+Results are correct
+Max. diff. =1.80603e-16
+Results are correct
+Max. diff. =1.80603e-16
+Results are correct
+Max. diff. =1.44755e-15
+Transform time (avg/min/max): 5.900020 5.781236 5.986823
+                         Timer:   Average   Minimum     Maximum
+                    Unpack.0.1:      3.271    2.95535    3.45843
+                  Exec.2.2.0.1:    2.41201    2.10334     2.6378
+                Pack_trans.0.1: 0.000266851 0.00020408 0.000347317
+         Reorder_trans.102.012:   0.849613   0.776022   0.948681
+               MPI_Waitany.1.2:   0.552673 0.000843406    2.28891
+            MPI_Ialltoallv.1.2:    3.83293    3.06016    4.71205
+               Exec.2.2.1024.1:    5.19092    4.47808    5.53064
+                Pack_trans.1.0: 0.000264401 0.000221198 0.000317896
+              Exec.2.2.1024.-1:    5.39728    4.67903    5.79215
+            MPI_Ialltoallv.0.1:  0.0145591  0.0125134  0.0175661
+                Pack_trans.2.1: 0.000416331 0.000343157 0.000486652
+         Reorder_trans.120.102:    6.32658    5.56984    7.01258
+                    Unpack.1.0:     2.7248    2.46672    3.00093
+                    Unpack.1.2:    2.50367     2.2146    2.84547
+         Reorder_trans.012.102:    1.47579    1.40211    1.60811
+         Reorder_trans.102.120:    6.25446    6.02271    6.52803
+            MPI_Ialltoallv.2.1:  0.0867739  0.0789267  0.0932898
+                 Exec.2.2.0.-1:    2.44322    2.17549    2.65002
+               MPI_Waitany.1.0:    2.44465    1.57096    3.96603
+                Pack_trans.1.2: 0.00035254 0.000282852 0.000446301
+            MPI_Ialltoallv.1.0:     4.6157    3.52615    5.24041
+               MPI_Waitany.2.1:   0.496185  0.0100082    1.37879
+               MPI_Waitany.0.1:    5.28684    4.27623     6.8043
+                    Unpack.2.1:    2.74614     2.1895    3.08419
+Summaries:
+                        Unpack:    11.2456    10.5035    11.9191
+                          Exec:    15.4434    13.6948    16.3334
+                    Pack_trans: 0.00130012 0.00115037  0.0014763
+                 Reorder_trans:    14.9064    14.0036     15.834
+                   MPI_Waitany:    8.78034    6.39187    12.0415
+                MPI_Ialltoallv:    8.54997       7.04    9.62872
+Sum total:    58.9271    51.6349    65.7581
+1829.51user 311.81system 1:15.77elapsed 2825%CPU (0avgtext+0avgdata 2401712maxresident)k
+0inputs+0outputs (169major+5701112minor)pagefaults 0swaps
+srun: error: thorbf2a001: task 0: Terminated
+srun: Force Terminated StepId=503320.62
+srun: error: thorbf2a001: task 0: Terminated
+srun: Force Terminated StepId=503320.63
+srun: error: thorbf2a001: task 0: Terminated
+srun: Force Terminated StepId=503320.64
+srun: error: thorbf2a001: task 0: Terminated
+srun: Force Terminated StepId=503320.65
+srun: error: thorbf2a002: task 0: Terminated
+srun: Force Terminated StepId=503320.68
+srun: error: thorbf2a002: task 0: Terminated
+srun: Force Terminated StepId=503320.69
+srun: error: thorbf2a002: task 0: Terminated
+srun: Force Terminated StepId=503320.66
+srun: error: thorbf2a002: task 0: Terminated
+srun: Force Terminated StepId=503320.67
+srun: error: thorbf2a003: task 0: Terminated
+srun: Force Terminated StepId=503320.71
+srun: error: thorbf2a003: task 0: Terminated
+srun: Force Terminated StepId=503320.74
+srun: error: thorbf2a003: task 0: Terminated
+srun: Force Terminated StepId=503320.72
+srun: error: thorbf2a003: task 0: Terminated
+srun: Force Terminated StepId=503320.70
+srun: error: thorbf2a004: task 0: Terminated
+srun: Force Terminated StepId=503320.76
+srun: error: thorbf2a004: task 0: Terminated
+srun: Force Terminated StepId=503320.73
+srun: error: thorbf2a004: task 0: Terminated
+srun: Force Terminated StepId=503320.75
+srun: error: thorbf2a004: task 0: Terminated
+srun: Force Terminated StepId=503320.77
+srun: error: thorbf2a005: task 0: Terminated
+srun: Force Terminated StepId=503320.78
+srun: error: thorbf2a005: task 0: Terminated
+srun: Force Terminated StepId=503320.80
+srun: error: thorbf2a005: task 0: Terminated
+srun: Force Terminated StepId=503320.79
+srun: error: thorbf2a005: task 0: Terminated
+srun: Force Terminated StepId=503320.81
+srun: error: thorbf2a006: task 0: Terminated
+srun: Force Terminated StepId=503320.85
+srun: error: thorbf2a006: task 0: Terminated
+srun: Force Terminated StepId=503320.84
+srun: error: thorbf2a006: task 0: Terminated
+srun: Force Terminated StepId=503320.82
+srun: error: thorbf2a006: task 0: Terminated
+srun: Force Terminated StepId=503320.83
