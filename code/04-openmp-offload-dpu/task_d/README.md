@@ -9,15 +9,15 @@
 7. `vim run_task.sh` (select the right node for server)
 8. `sbatch --export=NONE run_task.sh ./task_d/net_accel c 192.168.3.2XX` (where `XX` is the number in the name of the node) run the client task on host
 9. Observe the output as follwing or refer to the `out` folder:
-### server task file:
+### server task file
 ```
 cmd : ./task_d/net_accel
 ```
-### client task file:
+### client task file
 ```
 cmd : ./task_d/net_accel c 192.168.3.230
 ```
-### server service file:
+### server service file
 ```
 connection established.
 to   client > 01
@@ -31,7 +31,7 @@ to   client > 15
 to   client > 17
 to   client > 19
 ```
-### client service file:
+### client service file
 ```
 connection established.
 to   server > 00
