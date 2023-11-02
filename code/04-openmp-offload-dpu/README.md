@@ -1,3 +1,5 @@
+look into tasks folders for further details about running these tasks
+
 to compile, run
 		sh compile.sh
 
