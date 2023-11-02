@@ -6,7 +6,7 @@
 4. `sbatch --export=NONE run_service.sh` run the service on DPU
 5. `sbatch --export=NONE run_task.sh ./task_c/build/shared` run the task on host
 6. Observe the output as follwing or refer to the `out` folder:
-	- task file:
+### task file:
 ```
 lib path: /global/home/users/uthmanhere/omp_exp/smartnic-tutorial-sc23/code/04-openmp-offload-dpu/task_c/build/
 the path includes following libs:
@@ -14,7 +14,7 @@ the path includes following libs:
 /global/home/users/uthmanhere/omp_exp/smartnic-tutorial-sc23/code/04-openmp-offload-dpu/task_c/build//liblog_x86.so
 cmd: ./task_c/build/shared
 ```
-	- service file:
+### service file:
 ```
 lib path: /global/home/users/uthmanhere/omp_exp/smartnic-tutorial-sc23/code/04-openmp-offload-dpu/task_c/build/
 Hello from the other side (shared object actually..)
