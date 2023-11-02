@@ -11,7 +11,7 @@
 #include <arpa/inet.h>
 
 #define _PORT_ 3310
-#define _SERVER_IP_ "192.168.3.218"
+#define _SERVER_IP_ "192.168.3.230"
 #define _ITERATIONS_ (10)
 
 int tcp_init(char MODE)
