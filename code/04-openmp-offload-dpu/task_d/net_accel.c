@@ -3,6 +3,7 @@
 
 #include <omp.h> 
 #include <stdio.h>
+#include <string.h>
 #include <unistd.h>
 
 #include <sys/types.h>
@@ -11,15 +12,17 @@
 #include <arpa/inet.h>
 
 #define _PORT_ 3310
-#define _SERVER_IP_ "192.168.3.218"
 #define _ITERATIONS_ (10)
 
-int tcp_init(char MODE)
+int tcp_init(char MODE, char *server_ip)
 {
 	int fd, ret;
 	int enable_reuse = 1;
 	socklen_t socklen_;
 	struct sockaddr_in sockaddr_;
+
+	server_ip[strlen(server_ip)-1] = '\0';
+
 	fd = socket(AF_INET, SOCK_STREAM, 0);
 	if (fd == -1) {
 		err(-EAGAIN, "failed to crate socket.");
@@ -37,7 +40,7 @@ int tcp_init(char MODE)
 	sockaddr_.sin_port = htons(_PORT_);
 
 	if (MODE == 'c') {
-		sockaddr_.sin_addr.s_addr = inet_addr(_SERVER_IP_);
+		sockaddr_.sin_addr.s_addr = inet_addr(server_ip);
 		ret = connect(fd, (struct sockaddr *)&sockaddr_, sizeof(sockaddr_));
 		if (ret == -1) {
 			err(-EAGAIN, "failed to connect socket.");
@@ -95,19 +98,21 @@ int main(int argc, char *argv[])
 {
 	int fd;
 	char mode;
+	char *ip;
 	
 	if (argc < 2) {
 		mode = 's';
-	} else if (argc > 1 && argv[1][0] == 'c') {
+	} else if (argc > 2 && argv[1][0] == 'c') {
 		mode = 'c';
+		ip   = argv[2];
 	} else {
 		err(-EINVAL, "invalid argument. Leave empty for server. c for client");
 		return -EINVAL;
 	}
 
-#pragma omp target nowait
+#pragma omp target map(to:ip[0:strlen(ip)]) nowait
 {
-	fd = tcp_init(mode);
+	fd = tcp_init(mode, ip);
 
 	if (fd < 0) {
 		err(-EAGAIN, "init failed.");

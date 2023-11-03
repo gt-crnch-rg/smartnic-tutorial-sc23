@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0.0)
+cmake_minimum_required(VERSION 3.20.1)
 
 set(CMAKE_C_COMPILER clang)
 set(CMAKE_C_FLAGS "-fopenmp -fopenmp-targets=aarch64-unknown-linux")
