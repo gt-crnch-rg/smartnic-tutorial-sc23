@@ -9,6 +9,10 @@ Tutorial on SmartNICs for Supercomputing 2023
 
 ![BlueField 3 SmartNIC](https://github.com/gt-crnch-rg/smartnic-tutorial-hot-interconnects/blob/41db05cd929c19a445c6afae5dcb226bfb64ac79/fig/smartnic_bf3.jpg)
 
+## Mentimeter Audience Survey
+
+Please take our survey using [this Mentimeter link!](https://www.menti.com/aljr5bmzi3wc).
+
 ## Presenters:
 * Richard Graham [(NVIDIA)](nvidia.com)
 * Antonio Peña [(Barcelona Supercomputing Center)](https://www.bsc.es/pena-antonio)
