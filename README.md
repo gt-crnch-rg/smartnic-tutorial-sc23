@@ -11,7 +11,7 @@ Tutorial on SmartNICs for Supercomputing 2023
 
 ## Mentimeter Audience Survey
 
-Please take our survey using [this Mentimeter link!](https://www.menti.com/aljr5bmzi3wc).
+Please take our survey using [this Mentimeter link](https://www.menti.com/aljr5bmzi3wc).
 
 ## Presenters:
 * Richard Graham [(NVIDIA)](nvidia.com)
@@ -24,6 +24,7 @@ Supporting Contributors:
 * Muhammad Usman [(Barcelona Supercomputing Center)](https://www.bsc.es/usman-muhammad)
 * Oscar Hernandez [(Oak Ridge National Laboratory)](ornl.gov)
 * Dmitry Pekurovsky [(NVIDIA)](nvidia.com)
+* Sara Karamati, Maw Hawkins [Georgia Tech](http://hpcgarage.com/)
 
 
 **Abstract:** The past few years have witnessed a surge in the number of advanced network adapters, known as "SmartNICs", that offer additional functionalities beyond standard packet processing capabilities. These devices often feature programmable lightweight processing cores, FPGAs, and even CPU- and GPU-based platforms capable of running separate operating systems. Though primarily aimed at data center operations, such as infrastructure management, packet filtering, and I/O acceleration, SmartNICs are increasingly being explored for high-performance computing (HPC) application acceleration.
