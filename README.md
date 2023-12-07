@@ -57,4 +57,4 @@ Please see the examples under the `/code` folder. The tutorial slides will have 
 
 ## Slides
 
-Slides will be shared with tutorial attendees and shared more broadly after SC23.
+Please see the tutorial slides under the [slides folder](https://github.com/gt-crnch-rg/smartnic-tutorial-sc23/blob/9c52188c2a386b24595c9c9eee4297334a9a0624/slides/sc23-smartnic-tutorial-2023.pdf).
